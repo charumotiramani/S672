@@ -37,51 +37,12 @@ import {
 
 -------
 
-```js
 
-var fssGsoEsParams = await FileAttachment("specs/fssgso/es.json").json();
-var fssGsoSsParams = await FileAttachment("specs/fssgso/ss.json").json();
-```
-
-```js
-
-var selectGsoEs = Inputs.select(fssGsoEsParams, {
-  label: "Earth Station ",
-  format: (v) => v.Type,
-});
-const gsoEs = Generators.input(selectGsoEs);
-
-var selectGsoSs = Inputs.select(fssGsoSsParams, {
-  label: "Space Station",
-  format: (v) => v.Type,
-});
-const gsoSs = Generators.input(selectGsoSs);
-```
-
-
-
-
-<h2>FSS GSO Parameters</h2>
-<div class="grid grid-cols-2">
-  <div class="card">
-    ${selectGsoEs}
-    
-     
-  </div>
-  
-  <div class="card">
-    ${selectGsoSs}
-    
-    
-  </div>
-</div>
-
- 
 
 
 ```js 
 var fssNgsoEsParams = await FileAttachment("specs/fssngso/es.json").json();
-var fssNgsoSsParams = await FileAttachment("specs/fssngso/ss.json").json();
+//var fssNgsoSsParams = await FileAttachment("specs/fssngso/ss.json").json();
 ```
 
 ```js
@@ -91,29 +52,32 @@ var selectNgsoEs = Inputs.select(fssNgsoEsParams, {
 });
 const ngsoEs = Generators.input(selectNgsoEs);
 
-var selectNgsoSs = Inputs.select(fssNgsoSsParams, {
-  label: "NGSO Space Station Type",
-  format: (v) => v.Type,
-});
-const ngsoSs = Generators.input(selectNgsoSs);
+// var selectNgsoSs = Inputs.select(fssNgsoSsParams, {
+//   label: "NGSO Space Station Type",
+//   format: (v) => v.Type,
+// });
+// const ngsoSs = Generators.input(selectNgsoSs);
 ```
 
 
 <h2>FSS NGSO Parameters</h2>
 <div class="grid grid-cols-2">
-  <div class="card">
-    ${selectNgsoEs}
-    
-     
-  </div>
-  
-  <div class="card">
-    ${selectNgsoSs}
-    
-    
-  </div>
+<div class="card">
+
+${selectNgsoEs}
+
+</div>
+<div class="card">
+
+```js
+display({ ngsoEs });
+```
+
+
 </div>
 
+</div>
+ 
   
 
 
