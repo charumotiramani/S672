@@ -29,7 +29,7 @@
         "AntennaTxTypicalEle": [5, 90],
         "AntennaTxPol":"Circular",
         "AntennaDiameterTx":0.05,
-        "MaxSpecDensTx": -15,
+        "MaxSpecDensTx": -15
         
     },
     {
@@ -62,7 +62,7 @@
         "AntennaTxTypicalEle": [5, 90],
         "AntennaTxPol":"Circular",
         "AntennaDiameterTx":0.3,
-        "MaxSpecDensTx": -10,
+        "MaxSpecDensTx": -10
 
     },
     {
@@ -95,7 +95,7 @@
         "AntennaTxTypicalEle": [5, 90],
         "AntennaTxPol":"LH Circular",
         "AntennaDiameterTx":0.45,
-        "MaxSpecDensTx": -10,
+        "MaxSpecDensTx": -10
     },
     {
         "AI": 1.7,
@@ -127,7 +127,7 @@
         "AntennaTxTypicalEle": [5, 90],
         "AntennaTxPol":"Circular",
         "AntennaDiameterTx":0.5,
-        "MaxSpecDensTx": 2.2,
+        "MaxSpecDensTx": 2.2
     },
     {
         "AI": 1.7,
