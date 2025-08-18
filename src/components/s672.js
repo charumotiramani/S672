@@ -1,3 +1,7 @@
+import * as d3 from 'd3';
+import * as topojson from 'topojson-client';
+import * as turf from '@turf/turf';
+
 function geodeticToECEF(lat, lon, alt_km) {
   const a = 6378.137; // Earth equatorial radius km
   const f = 1 / 298.257223563;
@@ -312,6 +316,268 @@ function destinationLatLon(lat, lon, az, psi) {
   const λ2 = λ1 + Math.atan2(Math.sin(θ) * Math.sin(δ) * Math.cos(φ1), Math.cos(δ) - Math.sin(φ1) * sinφ2);
   return [λ2 * 180 / Math.PI, φ2 * 180 / Math.PI];
 }
+let currentProjection = "orthographic"; // Default projection
+let rotation = [0, 0, 0]; // 
+
+function getProjectionConfig() {
+    const config = { type: currentProjection };
+    
+    // Add rotation for 3D projections
+    if (currentProjection === "orthographic" || 
+        currentProjection === "azimuthal-equal-area" || 
+        currentProjection === "stereographic") {
+      config.rotate = rotation;
+    }
+    
+    // Special configurations for specific projections
+    if (currentProjection === "albers-usa") {
+      config.parallels = [29.5, 45.5];
+    }
+    
+    return config;
+  }
+
+  function validateContourNesting(footprints) {
+  // Sort footprints by gain (highest to lowest)
+  const sortedFootprints = [...footprints].sort((a, b) => b.gain - a.gain);
+  
+  for (let i = 0; i < sortedFootprints.length - 1; i++) {
+    const higherGainContour = sortedFootprints[i];
+    const lowerGainContour = sortedFootprints[i + 1];
+    
+    // If higher gain contour has larger area than lower gain, there's likely a crossing
+    if (higherGainContour.area_km2 > lowerGainContour.area_km2 * 1.1) { // 10% tolerance
+      // Invalidate the problematic lower gain contour
+      lowerGainContour.points = [];
+      lowerGainContour.area_km2 = 0;
+    }
+  }
+  
+  return sortedFootprints;
+}
+
+
+function multiGainMap({ world, footprints, controls }) {
+  const width = 800, height = 500;
+  const colors = ["#00ff00", "#ffff00", "#ffa500", "#ff0000"];
+  const projections = [
+    { value: "mercator", label: "Mercator" },
+    { value: "orthographic", label: "Orthographic (3D Globe)" },
+    { value: "azimuthalEqualArea", label: "Azimuthal Equal Area" },
+    { value: "stereographic", label: "Stereographic" },
+    { value: "equirectangular", label: "Equirectangular" }
+  ];
+
+  let currentProjection = "orthographic";
+  let rotation = [0, 0, 0];
+  let isDragging = false;
+  let lastMousePos = null;
+
+  // Container
+  const container = document.createElement("div");
+  container.style.position = "relative";
+  container.style.width = `${width}px`;
+  container.style.height = `${height}px`;
+
+  // Projection selector
+  const selector = document.createElement("select");
+  selector.style.position = "absolute";
+  selector.style.top = "10px";
+  selector.style.right = "10px";
+  selector.style.zIndex = "1000";
+  selector.style.padding = "5px";
+  selector.style.background = "white";
+  selector.style.border = "1px solid #ccc";
+  selector.style.borderRadius = "4px";
+  selector.style.fontSize = "12px";
+  projections.forEach(proj => {
+    const opt = document.createElement("option");
+    opt.value = proj.value;
+    opt.textContent = proj.label;
+    if (proj.value === currentProjection) opt.selected = true;
+    selector.appendChild(opt);
+  });
+  selector.addEventListener("change", e => {
+    currentProjection = e.target.value;
+    if (currentProjection !== "orthographic") rotation = [0, 0, 0];
+    draw();
+  });
+
+  function getProjection() {
+    let proj;
+    switch (currentProjection) {
+      case "mercator": proj = d3.geoMercator(); break;
+      case "orthographic":
+        proj = d3.geoOrthographic().rotate(rotation);
+        break;
+      case "azimuthalEqualArea": proj = d3.geoAzimuthalEqualArea().rotate(rotation); break;
+      case "stereographic": proj = d3.geoStereographic().rotate(rotation); break;
+      case "equirectangular": proj = d3.geoEquirectangular(); break;
+      default: proj = d3.geoOrthographic().rotate(rotation);
+    }
+    proj.fitSize([width, height], topojson.feature(world, world.objects.land));
+    return proj;
+  }
+
+  function handleMouseDown(e) {
+    if (currentProjection === "orthographic") {
+      isDragging = true;
+      lastMousePos = { x: e.clientX, y: e.clientY };
+      e.preventDefault();
+    }
+  }
+  function handleMouseMove(e) {
+    if (isDragging && currentProjection === "orthographic" && lastMousePos) {
+      const deltaX = e.clientX - lastMousePos.x;
+      const deltaY = e.clientY - lastMousePos.y;
+      const sensitivity = 0.5;
+      rotation[0] -= deltaX * sensitivity;
+      rotation[1] += deltaY * sensitivity;
+      rotation[1] = Math.max(-90, Math.min(90, rotation[1]));
+      lastMousePos = { x: e.clientX, y: e.clientY };
+      draw();
+    }
+  }
+  function handleMouseUp() {
+    isDragging = false;
+    lastMousePos = null;
+  }
+
+  function draw() {
+    container.innerHTML = "";
+    const svg = d3.create("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .style("display", "block")
+      .style("background", "#e6f3ff")
+      .node();
+
+    // World map
+    const projection = getProjection();
+    const path = d3.geoPath(projection);
+
+    const worldGeoJSON = topojson.feature(world, world.objects.land);
+    d3.select(svg)
+      .append("path")
+      .datum(worldGeoJSON)
+      .attr("d", path)
+      .attr("fill", "#e6f3ff")
+      .attr("stroke", "#999");
+
+    // Graticule
+    const graticule = d3.geoGraticule();
+    d3.select(svg)
+      .append("path")
+      .datum(graticule())
+      .attr("d", path)
+      .attr("stroke", "#ccc")
+      .attr("fill", "none");
+
+    // Gain contours
+    const sortedFootprints = [...footprints].sort((a, b) => b.gain - a.gain);
+    sortedFootprints.forEach((fp, i) => {
+      if (!fp.points || fp.points.length < 3) return;
+      const coords = fp.points.map(([lat, lon]) => [lon, lat]);
+      coords.push(coords[0]);
+      const poly = turf.polygon([coords]);
+      d3.select(svg)
+        .append("path")
+        .datum(poly)
+        .attr("d", path)
+        .attr("stroke", colors[i])
+        .attr("stroke-width", 2)
+        .attr("fill", "none");
+    });
+
+    // Satellite and beam points
+    const sat = projection([controls.satelliteLon, controls.satelliteLat]);
+    const beam = projection([controls.antennaLon, controls.antennaLat]);
+    d3.select(svg)
+      .append("circle")
+      .attr("cx", sat[0])
+      .attr("cy", sat[1])
+      .attr("r", 4)
+      .attr("fill", "red")
+      .attr("stroke", "white");
+    d3.select(svg)
+      .append("circle")
+      .attr("cx", beam[0])
+      .attr("cy", beam[1])
+      .attr("r", 4)
+      .attr("fill", "lime")
+      .attr("stroke", "white");
+
+    // Line between satellite and beam
+    d3.select(svg)
+      .append("line")
+      .attr("x1", sat[0])
+      .attr("y1", sat[1])
+      .attr("x2", beam[0])
+      .attr("y2", beam[1])
+      .attr("stroke", "red")
+      .attr("stroke-dasharray", "4,4")
+      .attr("stroke-width", 1);
+
+    svg.addEventListener("mousedown", handleMouseDown);
+    svg.addEventListener("mousemove", handleMouseMove);
+    svg.addEventListener("mouseup", handleMouseUp);
+    svg.addEventListener("mouseleave", handleMouseUp);
+
+    svg.style.cursor = currentProjection === "orthographic"
+      ? (isDragging ? "grabbing" : "grab")
+      : "default";
+
+    container.appendChild(svg);
+    container.appendChild(selector);
+
+    // Legend
+    const legend = document.createElement("div");
+    legend.style.position = "absolute";
+    legend.style.top = "10px";
+    legend.style.left = "10px";
+    legend.style.background = "rgba(255,255,255,0.8)";
+    legend.style.padding = "5px";
+    legend.style.border = "1px solid #ccc";
+    legend.style.fontSize = "12px";
+    legend.style.borderRadius = "4px";
+    legend.innerHTML = `<div style="font-weight: bold; margin-bottom: 5px;">Gain Contours</div>` +
+      sortedFootprints.map((fp, i) =>
+        fp.points.length > 0 ? `
+          <div style="display: flex; align-items: center; margin: 2px 0;">
+            <div style="width: 12px; height: 12px; background: ${colors[i]}; margin-right: 5px; border: 1px solid #777;"></div>
+            <span>
+              <b>Contour ${fp.index}:</b> ${fp.relativeGain.toFixed(1)} dB (abs: ${fp.gain.toFixed(1)} dBi)<br>
+              <span style="font-size:11px;">Area: ${fp.area_km2.toLocaleString('en-US', {maximumFractionDigits: 0})} km²</span>
+            </span>
+          </div>
+        ` : ""
+      ).join("");
+    container.appendChild(legend);
+
+    // Instructions
+    if (currentProjection === "orthographic") {
+      const instructions = document.createElement("div");
+      instructions.style.position = "absolute";
+      instructions.style.bottom = "10px";
+      instructions.style.right = "10px";
+      instructions.style.background = "rgba(255,255,255,0.9)";
+      instructions.style.padding = "5px";
+      instructions.style.border = "1px solid #ccc";
+      instructions.style.fontSize = "11px";
+      instructions.style.borderRadius = "4px";
+      instructions.style.maxWidth = "150px";
+      instructions.innerHTML = `<div style="font-weight: bold; margin-bottom: 2px;">Globe Controls:</div>
+        <div>Click and drag to rotate</div>`;
+      container.appendChild(instructions);
+    }
+  }
+
+  document.addEventListener("mousemove", handleMouseMove);
+  document.addEventListener("mouseup", handleMouseUp);
+
+  draw();
+  return container;
+}
 
 export {geodeticToECEF,
   ecefToGeodetic,
@@ -329,4 +595,8 @@ export {geodeticToECEF,
   computeFootprint,
   calculateFootprintArea,
   destinationLatLon,
+  getProjectionConfig,
+  validateContourNesting,
+  multiGainMap
+
   };

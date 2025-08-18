@@ -9,6 +9,7 @@ The primary purpose of this tool is to understand how various parameters—such 
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
 import * as turf from '@turf/turf';
+import * as Plot from "@observablehq/plot";
 ```
 
 ```js
@@ -29,6 +30,9 @@ import {
   computeFootprint,
   calculateFootprintArea,
   destinationLatLon,
+  getProjectionConfig,
+  validateContourNesting,
+  multiGainSVG 
   } from './components/s672.js';
 ```
 
@@ -45,17 +49,16 @@ var fssGsoSsParams = await FileAttachment("specs/fssgso/ss.json").json();
 
 var selectGsoEs = Inputs.select(fssGsoEsParams, {
   label: "Earth Station ",
-  format: (v) => v.Type,
+  format: (v) => v.esType,
 });
 const gsoEs = Generators.input(selectGsoEs);
 
 var selectGsoSs = Inputs.select(fssGsoSsParams, {
   label: "Space Station",
-  format: (v) => v.Type,
+  format: (v) => v.ssType,
 });
 const gsoSs = Generators.input(selectGsoSs);
 ```
-
 
 
 
@@ -85,13 +88,13 @@ var fssNgsoSsParams = await FileAttachment("specs/fssngso/ss.json").json();
 ```js
 var selectNgsoEs = Inputs.select(fssNgsoEsParams, {
   label: "NGSO Earth Station Type",
-  format: (v) => v.Type,
+  format: (v) => v.esType,
 });
 const ngsoEs = Generators.input(selectNgsoEs);
 
 var selectNgsoSs = Inputs.select(fssNgsoSsParams, {
   label: "NGSO Space Station Type",
-  format: (v) => v.Type,
+  format: (v) => v.ssType,
 });
 const ngsoSs = Generators.input(selectNgsoSs);
 ```
@@ -119,7 +122,7 @@ const ngsoSs = Generators.input(selectNgsoSs);
 var world = await FileAttachment(
   "./components/world.json"
 ).json();
-display({world});
+//display({world});
 ```
 
 ## Input Parameters
@@ -253,71 +256,77 @@ const gain_rel_3 = view(Inputs.range([-30, 0], {label: "Contour 3 (dB rel. to G�
 const gain_rel_4 = view(Inputs.range([-30, 0], {label: "Contour 4 (dB rel. to Gₘ)", step: 0.1, value: -20}));
 ```
 
-```js
-const Gm = Gm_GSO;
-```
+
 
 </div>
 
 </div>
 
+
 ```js 
-
-const controls =({gainPatternType,satelliteLat,satelliteLon,satelliteAlt,gain_rel_1, gain_rel_2, gain_rel_3, gain_rel_4 ,satelliteLat, satelliteLon, satelliteAlt,antennaLat, antennaLon,Gm});
-
-display({controls});
-
+const controls = {
+  gainPatternType, satelliteLat, satelliteLon, satelliteAlt,
+  gain_rel_1, gain_rel_2, gain_rel_3, gain_rel_4,
+  antennaLat, antennaLon,
+  Gm: Gm_GSO,
+  psi0: psi0_GSO,
+  Ls: Ls_GSO
+};
+//display({controls});
 ```
 
 
 ```js 
-const relativeGains = [
+function getFootprints() {
+  const relativeGains = [
     controls.gain_rel_1,
     controls.gain_rel_2,
     controls.gain_rel_3,
     controls.gain_rel_4
   ];
-display({relativeGains});
+  
 
- // Calculate absolute gains by adding the (negative) relative gain to Gm
-const absoluteGains = relativeGains.map(rel_gain => controls.Gm + rel_gain);
-display({absoluteGains});
+  const absoluteGains = relativeGains.map(rel_gain => controls.Gm + rel_gain);
+  const satECEF = geodeticToECEF(controls.satelliteLat, controls.satelliteLon, controls.satelliteAlt);
+  const targetECEF = geodeticToECEF(controls.antennaLat, controls.antennaLon, 0);
+  const boresight = normalize(targetECEF.map((v, i) => v - satECEF[i]));
+  const isElliptical = controls.gainPatternType.startsWith("Elliptical");
 
-const satECEF = geodeticToECEF(controls.satelliteLat, controls.satelliteLon, controls.satelliteAlt);
-display({satECEF});
-
-const targetECEF = geodeticToECEF(controls.antennaLat, controls.antennaLon, 0);
-display({targetECEF});
-
-const boresight = normalize(targetECEF.map((v, i) => v - satECEF[i]));
-display({boresight});
-
-const isElliptical = controls.gainPatternType.startsWith("Elliptical");
-display({isElliptical});
-```
-
-```js
-// Calculate footprints for each gain level
-function getFootprints() {
-  return absoluteGains.map((gain, index) => {
+  let rawFootprints = absoluteGains.map((gain, index) => {
     const points = isElliptical
       ? computeFootprintElliptical(satECEF, boresight, controls, gain)
       : computeFootprint(satECEF, boresight, controls, gain);
 
     const area_km2 = calculateFootprintArea(points);
     return {
-      gain: gain, // Absolute gain (e.g., 37 dBi)
-      relativeGain: relativeGains[index], // Relative gain from slider (e.g., -3 dB)
+      gain: gain,
+      relativeGain: relativeGains[index],
       index: index + 1,
       points: points,
       area_km2: area_km2
     };
   });
+  
+  // NEW: Validate and fix contour nesting issues
+  return validateContourNesting(rawFootprints);
 }
 ```
 
+
+
 ```js
 const footprints = getFootprints();
-display({footprints});
+//display({footprints});
 ```
 
+
+```js
+import { multiGainMap } from './components/s672.js';
+import * as d3 from 'd3';
+```
+
+
+```js echo 
+const map = multiGainMap({ world, footprints, controls });
+display(map);
+```

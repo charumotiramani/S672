@@ -3,13 +3,36 @@ title: FSS GSO DL Controls
 theme: cotton
 ---
 
-This notebook provides an interactive visualization of satellite antenna gain footprints on the Earth's surface. It allows users to select from several standard ITU-R (International Telecommunication Union Radiocommunication Sector) antenna pattern models, configure satellite and beam parameters, and observe the resulting gain contours on a world map.
 
-The primary purpose of this tool is to understand how various parameters—such as satellite altitude, beamwidth, and antenna gain—affect the coverage area and gain distribution of a satellite's signal on the ground.
+```js
+import * as d3 from 'd3';
+import * as topojson from 'topojson-client';
+import * as turf from '@turf/turf';
+```
 
-
-
--------
+```js
+import {
+  geodeticToECEF,
+  ecefToGeodetic,
+  normalize,
+  dot,
+  cross,
+  rotateVector,
+  gainPatternGSO,
+  gainPatternMEO,
+  gainPatternLEO,
+  gainPatternSingleFeed,
+  gainPatternElliptical,
+  getGainAtAngle,
+  computeFootprintElliptical,
+  computeFootprint,
+  calculateFootprintArea,
+  destinationLatLon,
+  getProjectionConfig,
+  validateContourNesting,
+  multiGainSVG 
+  } from './components/s672.js';
+```
 
 ```js
 
@@ -17,51 +40,38 @@ var fssGsoEsParams = await FileAttachment("specs/fssgso/es.json").json();
 //var fssGsoSsParams = await FileAttachment("specs/fssgso/ss.json").json();
 ```
 
-```js
 
+```js
 var selectGsoEs = Inputs.select(fssGsoEsParams, {
   label: "Earth Station ",
-  format: (v) => v.Type,
+  format: (v) => v.esType,
 });
 const gsoEs = Generators.input(selectGsoEs);
-
-// var selectGsoSs = Inputs.select(fssGsoSsParams, {
-//   label: "Space Station",
-//   format: (v) => v.Type,
-// });
-// const gsoSs = Generators.input(selectGsoSs);
 ```
-
 
 
 <h2>FSS GSO Parameters</h2>
 <div class="grid grid-cols-2">
 <div class="card">
 
-${selectGsoEs}
-
-</div>
-<div class="card">
+ ${selectGsoEs}
 
 ```js
-display({ gsoEs });
+display(gsoEs);
 ```
 
-
 </div>
 
 </div>
  
  
-
-
 
 
 ```js 
 var world = await FileAttachment(
   "./components/world.json"
 ).json();
-display({world});
+//display({world});
 ```
 
 ## Input Parameters
@@ -110,24 +120,13 @@ const antennaLat = view(Inputs.range([-90, 90], {
   }));
 ```
 
-### Controls for each pattern
 
-
-<div style="display:block" >
-
-  <div class="grid grid-cols-3"  style="grid-auto-rows: auto;">
-
-  <div class="card">
 
 
 #### GSO Control
 
-```js
-const Gm_GSO = view(Inputs.range([0,60],{label:"Gₘ (dBi)",step:0.1,value:40}));
-const Ls_GSO = view(Inputs.select([-10,-20],{label:"Lₛ (dB)",value:-10}));
-const psi0_GSO = view(Inputs.range([0.1,10],{label:"ψ₀ (°)",step:0.01,value:1.5}));
-```
-</div>
+
+<!-- </div>
 
   <div class="card">
 
@@ -151,13 +150,13 @@ const Ls_LEO = view(Inputs.range([-30,0],{label:"Lₛ (dB)",step:0.1,value:-6.75
 const psi_b_LEO = view(Inputs.range([0.1,10],{label:"ψᵦ (°)",step:0.01,value:1.6}));
 const psi_z_LEO = view(Inputs.range([10,45],{label:"Z Angle (°)",step:0.1,value:20.4}));
 const gainFloor_LEO = view(Inputs.range([-10,20],{label:"Gain Floor (dBi)",step:0.1,value:5}));
-```
+``` -->
 </div>
 
 </div>
 
 
-#### SF Control
+<!-- #### SF Control
 
 ```js 
 const Gm_SF = view(Inputs.range([0,60],{label:"Gₘ (dBi)",step:0.1,value:40}));
@@ -166,7 +165,7 @@ const psi0_SF = view(Inputs.range([0.1,10],{label:"ψ₀ (°)",step:0.01,value:1
 ```
 </div>
 
-</div>
+</div> -->
 
 <div style="display:block" >
 
@@ -174,14 +173,26 @@ const psi0_SF = view(Inputs.range([0.1,10],{label:"ψ₀ (°)",step:0.01,value:1
 
   <div class="card">
 
-#### Controls for Elliptical Pattern
+<!-- #### Controls for Elliptical Pattern
 
  
 ```js
 const Gm_Elliptical = view(Inputs.range([0, 60], {label: "G₀ (dBi)", step: 0.1, value: 45}));
 const theta3dB_Elliptical = view(Inputs.range([0.1, 10], {label: "θ₃ₐₒ (°)", step: 0.05, value: 2.5}));
 const phi3dB_Elliptical = view(Inputs.range([0.1, 10], {label: "φ₃ₐₒ (°)", step: 0.05, value: 1.5}));
+``` -->
+
+```js
+// const Gm_GSO = view(Inputs.range([0,60],{label:"Gₘ (dBi)",step:0.1,value:40}));
+// const Ls_GSO = view(Inputs.select([-10,-20],{label:"Lₛ (dB)",value:-10}));
+// const psi0_GSO = view(Inputs.range([0.1,10],{label:"ψ₀ (°)",step:0.01,value:1.5}));
+const selected = gsoEs;
+const Gm_GSO = view(Inputs.range([0, 60], { label: "Gₘ (dBi)", step: 0.1, value: selected?.AntennaPeakGainRx ?? 40 }));
+const psi0_GSO= view(Inputs.range([0.1, 10], { label: "φ₃ₑdB (°)", step: 0.01, value: selected?.Antenna3dbRx ?? 1.5 }));
+const Ls_GSO = view(Inputs.select([-10,-20],{label:"Lₛ (dB)",value:-10}));
+
 ```
+
 </div>
 
   <div class="card">
@@ -195,97 +206,77 @@ const gain_rel_3 = view(Inputs.range([-30, 0], {label: "Contour 3 (dB rel. to G�
 const gain_rel_4 = view(Inputs.range([-30, 0], {label: "Contour 4 (dB rel. to Gₘ)", step: 0.1, value: -20}));
 ```
 
-```js
-const Gm = Gm_GSO;
-```
 
 </div>
 
 </div>
 
+
+
 ```js 
-
-const controls =({gainPatternType,satelliteLat,satelliteLon,satelliteAlt,gain_rel_1, gain_rel_2, gain_rel_3, gain_rel_4 ,satelliteLat, satelliteLon, satelliteAlt,antennaLat, antennaLon,Gm});
-
-display({controls});
-
+const controls = {
+  gainPatternType, satelliteLat, satelliteLon, satelliteAlt,
+  gain_rel_1, gain_rel_2, gain_rel_3, gain_rel_4,
+  antennaLat, antennaLon,
+  Gm: Gm_GSO,
+  psi0: psi0_GSO,
+  Ls: Ls_GSO
+};
+//display({controls});
 ```
 
 
 ```js 
-const relativeGains = [
+function getFootprints() {
+  const relativeGains = [
     controls.gain_rel_1,
     controls.gain_rel_2,
     controls.gain_rel_3,
     controls.gain_rel_4
   ];
-display({relativeGains});
+  
 
- // Calculate absolute gains by adding the (negative) relative gain to Gm
-const absoluteGains = relativeGains.map(rel_gain => controls.Gm + rel_gain);
-display({absoluteGains});
+  const absoluteGains = relativeGains.map(rel_gain => controls.Gm + rel_gain);
+  const satECEF = geodeticToECEF(controls.satelliteLat, controls.satelliteLon, controls.satelliteAlt);
+  const targetECEF = geodeticToECEF(controls.antennaLat, controls.antennaLon, 0);
+  const boresight = normalize(targetECEF.map((v, i) => v - satECEF[i]));
+  const isElliptical = controls.gainPatternType.startsWith("Elliptical");
 
-const satECEF = geodeticToECEF(controls.satelliteLat, controls.satelliteLon, controls.satelliteAlt);
-display({satECEF});
-
-const targetECEF = geodeticToECEF(controls.antennaLat, controls.antennaLon, 0);
-display({targetECEF});
-
-const boresight = normalize(targetECEF.map((v, i) => v - satECEF[i]));
-display({boresight});
-
-const isElliptical = controls.gainPatternType.startsWith("Elliptical");
-display({isElliptical});
-```
-
-```js
-// Calculate footprints for each gain level
-function getFootprints() {
-  return absoluteGains.map((gain, index) => {
+  let rawFootprints = absoluteGains.map((gain, index) => {
     const points = isElliptical
       ? computeFootprintElliptical(satECEF, boresight, controls, gain)
       : computeFootprint(satECEF, boresight, controls, gain);
 
     const area_km2 = calculateFootprintArea(points);
     return {
-      gain: gain, // Absolute gain (e.g., 37 dBi)
-      relativeGain: relativeGains[index], // Relative gain from slider (e.g., -3 dB)
+      gain: gain,
+      relativeGain: relativeGains[index],
       index: index + 1,
       points: points,
       area_km2: area_km2
     };
   });
+  
+  // NEW: Validate and fix contour nesting issues
+  return validateContourNesting(rawFootprints);
 }
 ```
 
+
+
 ```js
 const footprints = getFootprints();
-display({footprints});
+//display({footprints});
 ```
 
+
 ```js
+import { multiGainMap } from './components/s672.js';
 import * as d3 from 'd3';
-import * as topojson from 'topojson-client';
-import * as turf from '@turf/turf';
 ```
 
-```js
-import {
-  geodeticToECEF,
-  ecefToGeodetic,
-  normalize,
-  dot,
-  cross,
-  rotateVector,
-  gainPatternGSO,
-  gainPatternMEO,
-  gainPatternLEO,
-  gainPatternSingleFeed,
-  gainPatternElliptical,
-  getGainAtAngle,
-  computeFootprintElliptical,
-  computeFootprint,
-  calculateFootprintArea,
-  destinationLatLon,
-  } from './components/s672.js';
+
+```js echo 
+const map = multiGainMap({ world, footprints, controls });
+display(map);
 ```
