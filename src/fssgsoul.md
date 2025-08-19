@@ -4,8 +4,6 @@ theme: cotton
 ---
 
 
-
-
 ```js
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
@@ -200,15 +198,9 @@ const phi3dB_Elliptical = view(Inputs.range([0.1, 10], {label: "φ₃ₐₒ (°)
 
 ```js
 const selectedSS = gsoSs;
-
-// Use Rx parameters for downlink, Tx parameters for uplink as needed:
-const Gm = selectedSS?.AntennaPeakGainTx ?? 35;
-const phi3dB = selectedSS?.AntennaPatternRx.BW3db ?? 2.5;
-const Ls = selectedSS?.AntennaPatternRx.Ls ?? -10; // If not present, use a default
-
-const Gm_Control = view(Inputs.range([0,60], {label:"Gₘ (dBi)", step:0.1, value: Gm}));
-const phi3dB_Control = view(Inputs.range([0.1, 10], {label:"φ₃ₑdB (°)", step:0.01, value: phi3dB}));
-const Ls_Control = view(Inputs.select([-10, -20], {label: "Lₛ (dB)", value: Ls}));
+const Gm_GSO = view(Inputs.range([0, 60], { label: "Gₘ (dBi)", step: 0.1, value: selectedSS?.AntennaPeakGainTx ?? 35 }));
+const psi0_GSO= view(Inputs.range([0.1, 10], { label: "φ₃ₑdB (°)", step: 0.01, value: selectedSS?.AntennaPatternRx.BW3db ?? 2.5 }));
+const Ls_GSO = view(Inputs.select([-10,-20],{label:"Lₛ (dB)",value:selectedSS?.AntennaPatternRx.Ls ?? -10}));
 ```
 
 
@@ -236,9 +228,9 @@ const controls = {
   gainPatternType, satelliteLat, satelliteLon, satelliteAlt,
   gain_rel_1, gain_rel_2, gain_rel_3, gain_rel_4,
   antennaLat, antennaLon,
-  Gm: Gm_Control,
-  phi0: phi3dB_Control,
-  Ls: Ls_Control
+  Gm: Gm_GSO,
+  psi0: psi0_GSO,
+  Ls: Ls_GSO
 };
 //display({controls});
 ```
