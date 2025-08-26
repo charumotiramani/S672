@@ -144,7 +144,14 @@ const ESlocations = turf.featureCollection( ESlocs.map((m) => turf.point(m.pos, 
 
 ```js
 // display(view(tleinfo))
-const tleinfo=view(Inputs.textarea({label:"TLE Info",value:oc3}))
+// const SatelliteName=view(Inputs.text({label:"SatelliteName",value:"Oceansat3"}))
+const SatelliteIndex=view(Inputs.select(SatelliteTLE, {format:d=> 
+   {
+    console.log("format ",d)
+    return SatelliteTLE[d].name
+    }, label:"SatelliteName",value:0}))
+const SatelliteName=SatelliteTLE[SatelliteIndex].name
+const tleinfo=view(Inputs.textarea({label:"TLE Info",value:SatelliteTLE[selIndex].tle}))
 ```
 
 <div class="ui segment">
@@ -158,7 +165,7 @@ const globe = Plot.plot({
   // // currentcolor:"var(--theme-background-alt )"
   //  },
   // height: 500,
-  title: "Location : " ,
+  title: "Satellite : "+SatelliteName ,
   color: {
     legend: true,
     type: "linear",
@@ -187,27 +194,27 @@ const globe = Plot.plot({
       title: "name",
       fillOpacity: 0.5,
     }),
-    Plot.geo(orbitFull, {
-      stroke: "lightgrey",
-      strokeWidth: 1,
-      // strokeDasharray: [5, 5]
-    }),
+    // Plot.geo(orbitFull, {
+    //   stroke: "lightgrey",
+    //   strokeWidth: 1,
+    //   // strokeDasharray: [5, 5]
+    // }),
     Plot.dot([esloc],{
       x: "lng",
       y: "lat",
       r:10,
       strokeWidth: 1,
 }),
-    Plot.dot(oceansatPos, {
-      filter: (d) => (showAll ? true : d.period == selectPeriod),
-      x: "lng",
-      y: "lat",
-      strokeWidth: 1,
-      r: 0.7,
-      strokeOpacity: 0.5,
-      fill: "grey",
-      fillOpacity: 0.5,
-    }),
+    // Plot.dot(oceansatPos, {
+    //   filter: (d) => (showAll ? true : d.period == selectPeriod),
+    //   x: "lng",
+    //   y: "lat",
+    //   strokeWidth: 1,
+    //   r: 0.7,
+    //   strokeOpacity: 0.5,
+    //   fill: "green",
+    //   fillOpacity: 0.5,
+    // }),
  Plot.dot(pos, {
       
       x: "lng",
@@ -216,7 +223,7 @@ const globe = Plot.plot({
       // r: 1,
       // strokeOpacity: 0.5,
       tip:true,
-      title:d=>`alt:${d.altitude.toFixed(0)}\nelv(d):${d.elevation.toFixed(0)}`,
+      title:d=>`alt:${d.altitude.toFixed(0)}\nelv(d):${d.elevation.toFixed(0)},${ESlocs[selIndex].name}`,
       // stroke:"grey",
       fill:d=> {
         // return "red"
@@ -523,5 +530,8 @@ function getOceansat2Positions(tle, hours, initialNow, esLat, esLng) {
 
 ```js
 import { getLatLngObj, getMeanMotion, getSatelliteInfo } from 'tle.js';
-
+const oc3tle=await  FileAttachment("./data/oceansat3.tle").text()
+const sen2a=await  FileAttachment("./data/senitel2a.tle").text()
+const SatelliteTLE=[{name:"Oceansat3",tle:oc3tle},{name:"Senitel2A",tle:sen2a}]
+display({SatelliteTLE})
 ```
