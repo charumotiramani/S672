@@ -154,9 +154,9 @@ const SatelliteIndex=view(Inputs.select(SatelliteTLE, {format:d=>
 
 ```js
 const SatelliteName=SatelliteIndex.name
-const tleinfo=SatelliteIndex.tle
-display({SatelliteName,tleinfo})
-// const tleinfo=view(Inputs.textarea({label:"TLE Info",value:SatelliteIndex.tle,disabled:true}))
+// const tleinfo=SatelliteIndex.tle
+// display({SatelliteName,tleinfo})
+const tleinfo=view(Inputs.textarea({label:"TLE Info",value:SatelliteIndex.tle,disabled:true}))
 ```
 
 <div class="ui segment">
@@ -294,7 +294,7 @@ display(globe);
 ```js
 display(
   Plot.rectY(
-    CombinedPosition,
+    pos,
     Plot.binX(
       { y: "proportion" },
       { x: "elevation", fill: "location", cumulative: false,filter:d=>location.includes(d.location),thresholds:[0,5,10,20,30,40,50,60,70,80,90] }
@@ -453,13 +453,20 @@ function toggleWindow(selector) {
 
 const esloc=({lat:ESlocs[selIndex].pos[1],lng:ESlocs[selIndex].pos[0]})
 // const angles=calculateLookAngles(esloc[0],esloc[1], 0, 70, 35786)
+```
 
-const results=CombinedPosition.map(d=>{
+```js
+        // let angle=calculateLookAngles(esloc.lat,esloc.lng,d.lat,d.lng,d.altitude)
+
+const results=pos.map(d=>{
 const res=calculateLookAngles(esloc.lat,esloc.lng,d.lat,d.lng,d.altitude)
 // d.elevation=res.elevation<0?null:res.elevation
+console.log(res,"result")
 return res.elevation<0?null:res.elevation
 }).filter(d=>d>=0)
+```
 
+```js
 
 const R3countries=turf.featureCollection(world.filter(d=>d.properties.ITURegion=="R3"))
 
@@ -481,7 +488,7 @@ const pos= getOceansat2Positions(tleinfo, 24, new Date(), esloc.lat , esloc.lng)
 const orbittle = turf.lineString(
   pos.map((d) => [d.lng, d.lat])
 );
-display(orbittle)
+display({orbittle,pos})
 ```
 
 
