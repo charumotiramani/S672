@@ -1,0 +1,842 @@
+[
+  {
+    "lat": -33.920022077434275,
+    "lng": 95.82888176047359,
+    "timestamp": 1755519711633,
+    "readableDate": "Mon, 18 Aug 2025 12:21:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -30.460556635256385,
+    "lng": 94.881089634735,
+    "timestamp": 1755519771633,
+    "readableDate": "Mon, 18 Aug 2025 12:22:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -26.994524756240097,
+    "lng": 93.9806667629799,
+    "timestamp": 1755519831633,
+    "readableDate": "Mon, 18 Aug 2025 12:23:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -23.522750785081683,
+    "lng": 93.11868784372318,
+    "timestamp": 1755519891633,
+    "readableDate": "Mon, 18 Aug 2025 12:24:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -20.04598276811713,
+    "lng": 92.2877628068158,
+    "timestamp": 1755519951633,
+    "readableDate": "Mon, 18 Aug 2025 12:25:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -16.564917909703443,
+    "lng": 91.4816516123616,
+    "timestamp": 1755520011633,
+    "readableDate": "Mon, 18 Aug 2025 12:26:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -13.08021804422734,
+    "lng": 90.69497446763775,
+    "timestamp": 1755520071633,
+    "readableDate": "Mon, 18 Aug 2025 12:27:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -9.59253140690174,
+    "lng": 89.92299103210121,
+    "timestamp": 1755520131633,
+    "readableDate": "Mon, 18 Aug 2025 12:28:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -6.102487225605256,
+    "lng": 89.16142033526874,
+    "timestamp": 1755520191633,
+    "readableDate": "Mon, 18 Aug 2025 12:29:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -2.610711018154875,
+    "lng": 88.40629732130405,
+    "timestamp": 1755520251633,
+    "readableDate": "Mon, 18 Aug 2025 12:30:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 0.8821735728741181,
+    "lng": 87.65384726942403,
+    "timestamp": 1755520311633,
+    "readableDate": "Mon, 18 Aug 2025 12:31:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 4.375541680150973,
+    "lng": 86.90037274325591,
+    "timestamp": 1755520371633,
+    "readableDate": "Mon, 18 Aug 2025 12:32:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 7.868764562273442,
+    "lng": 86.142145304647,
+    "timestamp": 1755520431633,
+    "readableDate": "Mon, 18 Aug 2025 12:33:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 11.361206820345513,
+    "lng": 85.37529527151075,
+    "timestamp": 1755520491633,
+    "readableDate": "Mon, 18 Aug 2025 12:34:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 14.852222879747268,
+    "lng": 84.59569260207248,
+    "timestamp": 1755520551633,
+    "readableDate": "Mon, 18 Aug 2025 12:35:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 18.34115206707075,
+    "lng": 83.79881100600065,
+    "timestamp": 1755520611633,
+    "readableDate": "Mon, 18 Aug 2025 12:36:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 21.82731147734509,
+    "lng": 82.97956553461019,
+    "timestamp": 1755520671633,
+    "readableDate": "Mon, 18 Aug 2025 12:37:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 25.309987935736718,
+    "lng": 82.1321102171365,
+    "timestamp": 1755520731633,
+    "readableDate": "Mon, 18 Aug 2025 12:38:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 28.78841365878277,
+    "lng": 81.24958147938483,
+    "timestamp": 1755520791633,
+    "readableDate": "Mon, 18 Aug 2025 12:39:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 32.26175868728544,
+    "lng": 80.3237534095478,
+    "timestamp": 1755520851633,
+    "readableDate": "Mon, 18 Aug 2025 12:40:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 35.72909053412953,
+    "lng": 79.34457894437283,
+    "timestamp": 1755520911633,
+    "readableDate": "Mon, 18 Aug 2025 12:41:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 39.18933179468405,
+    "lng": 78.29955219228526,
+    "timestamp": 1755520971633,
+    "readableDate": "Mon, 18 Aug 2025 12:42:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 42.64119504429274,
+    "lng": 77.17280807156614,
+    "timestamp": 1755521031633,
+    "readableDate": "Mon, 18 Aug 2025 12:43:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 46.08308671425826,
+    "lng": 75.9438202362118,
+    "timestamp": 1755521091633,
+    "readableDate": "Mon, 18 Aug 2025 12:44:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 49.512962394432996,
+    "lng": 74.58547123927656,
+    "timestamp": 1755521151633,
+    "readableDate": "Mon, 18 Aug 2025 12:45:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 52.928103653405614,
+    "lng": 73.06111504884598,
+    "timestamp": 1755521211633,
+    "readableDate": "Mon, 18 Aug 2025 12:46:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 56.32476352968146,
+    "lng": 71.31997296323615,
+    "timestamp": 1755521271633,
+    "readableDate": "Mon, 18 Aug 2025 12:47:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 59.69758350662871,
+    "lng": 69.28968049913409,
+    "timestamp": 1755521331633,
+    "readableDate": "Mon, 18 Aug 2025 12:48:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 63.038597313872984,
+    "lng": 66.8637858095964,
+    "timestamp": 1755521391633,
+    "readableDate": "Mon, 18 Aug 2025 12:49:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 66.33543073343137,
+    "lng": 63.87998488093658,
+    "timestamp": 1755521451633,
+    "readableDate": "Mon, 18 Aug 2025 12:50:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 69.56792791116722,
+    "lng": 60.08074023841499,
+    "timestamp": 1755521511633,
+    "readableDate": "Mon, 18 Aug 2025 12:51:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 72.70136261753157,
+    "lng": 55.03999231678814,
+    "timestamp": 1755521571633,
+    "readableDate": "Mon, 18 Aug 2025 12:52:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 75.67211950302399,
+    "lng": 48.02749387814784,
+    "timestamp": 1755521631633,
+    "readableDate": "Mon, 18 Aug 2025 12:53:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 78.35667997626216,
+    "lng": 37.790896147280264,
+    "timestamp": 1755521691633,
+    "readableDate": "Mon, 18 Aug 2025 12:54:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 80.51073183190894,
+    "lng": 22.458050782806364,
+    "timestamp": 1755521751633,
+    "readableDate": "Mon, 18 Aug 2025 12:55:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 81.71148280040241,
+    "lng": 0.8503695228104252,
+    "timestamp": 1755521811633,
+    "readableDate": "Mon, 18 Aug 2025 12:56:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 81.5438209372265,
+    "lng": -23.491895482922143,
+    "timestamp": 1755521871633,
+    "readableDate": "Mon, 18 Aug 2025 12:57:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 80.07751867612589,
+    "lng": -43.707428232770944,
+    "timestamp": 1755521931633,
+    "readableDate": "Mon, 18 Aug 2025 12:58:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 77.77136129422387,
+    "lng": -57.669486193802676,
+    "timestamp": 1755521991633,
+    "readableDate": "Mon, 18 Aug 2025 12:59:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 75.00800691395311,
+    "lng": -67.00463070602459,
+    "timestamp": 1755522051633,
+    "readableDate": "Mon, 18 Aug 2025 13:00:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 71.99656262538161,
+    "lng": -73.46747568095135,
+    "timestamp": 1755522111633,
+    "readableDate": "Mon, 18 Aug 2025 13:01:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 68.84238037398138,
+    "lng": -78.16671067642915,
+    "timestamp": 1755522171633,
+    "readableDate": "Mon, 18 Aug 2025 13:02:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 65.60036653428386,
+    "lng": -81.7448315281383,
+    "timestamp": 1755522231633,
+    "readableDate": "Mon, 18 Aug 2025 13:03:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 62.30092021982021,
+    "lng": -84.5792442390249,
+    "timestamp": 1755522291633,
+    "readableDate": "Mon, 18 Aug 2025 13:04:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 58.961913925823744,
+    "lng": -86.90028819285035,
+    "timestamp": 1755522351633,
+    "readableDate": "Mon, 18 Aug 2025 13:05:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 55.5944303637548,
+    "lng": -88.85453094639728,
+    "timestamp": 1755522411633,
+    "readableDate": "Mon, 18 Aug 2025 13:06:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 52.205667214500444,
+    "lng": -90.53894334205307,
+    "timestamp": 1755522471633,
+    "readableDate": "Mon, 18 Aug 2025 13:07:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 48.80049297827112,
+    "lng": -92.0199580535499,
+    "timestamp": 1755522531633,
+    "readableDate": "Mon, 18 Aug 2025 13:08:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 45.382324144528916,
+    "lng": -93.34451021271602,
+    "timestamp": 1755522591633,
+    "readableDate": "Mon, 18 Aug 2025 13:09:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 41.95364256361327,
+    "lng": -94.5466768048263,
+    "timestamp": 1755522651633,
+    "readableDate": "Mon, 18 Aug 2025 13:10:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 38.516312793283504,
+    "lng": -95.65181027311142,
+    "timestamp": 1755522711633,
+    "readableDate": "Mon, 18 Aug 2025 13:11:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 35.07178110255297,
+    "lng": -96.67919519223929,
+    "timestamp": 1755522771633,
+    "readableDate": "Mon, 18 Aug 2025 13:12:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 31.62121611987123,
+    "lng": -97.64380168217626,
+    "timestamp": 1755522831633,
+    "readableDate": "Mon, 18 Aug 2025 13:13:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 28.165582799676866,
+    "lng": -98.5574812997654,
+    "timestamp": 1755522891633,
+    "readableDate": "Mon, 18 Aug 2025 13:14:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 24.705711481122147,
+    "lng": -99.42979276120846,
+    "timestamp": 1755522951633,
+    "readableDate": "Mon, 18 Aug 2025 13:15:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 21.24233691665846,
+    "lng": -100.26859187784852,
+    "timestamp": 1755523011633,
+    "readableDate": "Mon, 18 Aug 2025 13:16:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 17.776127111240296,
+    "lng": -101.08046003888731,
+    "timestamp": 1755523071633,
+    "readableDate": "Mon, 18 Aug 2025 13:17:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 14.307703548087478,
+    "lng": -101.87102294550172,
+    "timestamp": 1755523131633,
+    "readableDate": "Mon, 18 Aug 2025 13:18:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 10.837655394029868,
+    "lng": -102.64519357176594,
+    "timestamp": 1755523191633,
+    "readableDate": "Mon, 18 Aug 2025 13:19:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 7.3665494716636095,
+    "lng": -103.40736255900434,
+    "timestamp": 1755523251633,
+    "readableDate": "Mon, 18 Aug 2025 13:20:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 3.8949372754146254,
+    "lng": -104.16155240373226,
+    "timestamp": 1755523311633,
+    "readableDate": "Mon, 18 Aug 2025 13:21:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": 0.42335998420036425,
+    "lng": -104.91154733601805,
+    "timestamp": 1755523371633,
+    "readableDate": "Mon, 18 Aug 2025 13:22:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -3.0476501073501483,
+    "lng": -105.66100854680141,
+    "timestamp": 1755523431633,
+    "readableDate": "Mon, 18 Aug 2025 13:23:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -6.517557146822551,
+    "lng": -106.41357920933244,
+    "timestamp": 1755523491633,
+    "readableDate": "Mon, 18 Aug 2025 13:24:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -9.985832614578435,
+    "lng": -107.17299347796326,
+    "timestamp": 1755523551633,
+    "readableDate": "Mon, 18 Aug 2025 13:25:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -13.451942436004899,
+    "lng": -107.94318595237452,
+    "timestamp": 1755523611633,
+    "readableDate": "Mon, 18 Aug 2025 13:26:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -16.915344630086935,
+    "lng": -108.72841625922118,
+    "timestamp": 1755523671633,
+    "readableDate": "Mon, 18 Aug 2025 13:27:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -20.37548283064328,
+    "lng": -109.53341421530159,
+    "timestamp": 1755523731633,
+    "readableDate": "Mon, 18 Aug 2025 13:28:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -23.831777139078604,
+    "lng": -110.36355692636295,
+    "timestamp": 1755523791633,
+    "readableDate": "Mon, 18 Aug 2025 13:29:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -27.28361116226049,
+    "lng": -111.22509247599896,
+    "timestamp": 1755523851633,
+    "readableDate": "Mon, 18 Aug 2025 13:30:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -30.730313651070517,
+    "lng": -112.125430800739,
+    "timestamp": 1755523911633,
+    "readableDate": "Mon, 18 Aug 2025 13:31:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -34.17113246456368,
+    "lng": -113.07353159886314,
+    "timestamp": 1755523971633,
+    "readableDate": "Mon, 18 Aug 2025 13:32:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -37.605197484320996,
+    "lng": -114.08043365831719,
+    "timestamp": 1755524031633,
+    "readableDate": "Mon, 18 Aug 2025 13:33:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -41.031469614247996,
+    "lng": -115.15999418153582,
+    "timestamp": 1755524091633,
+    "readableDate": "Mon, 18 Aug 2025 13:34:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -44.44865397469727,
+    "lng": -116.32993968386728,
+    "timestamp": 1755524151633,
+    "readableDate": "Mon, 18 Aug 2025 13:35:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -47.85509859190159,
+    "lng": -117.6134097348509,
+    "timestamp": 1755524211633,
+    "readableDate": "Mon, 18 Aug 2025 13:36:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -51.24861064843535,
+    "lng": -119.04126035121033,
+    "timestamp": 1755524271633,
+    "readableDate": "Mon, 18 Aug 2025 13:37:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -54.62618676708461,
+    "lng": -120.65561627932368,
+    "timestamp": 1755524331633,
+    "readableDate": "Mon, 18 Aug 2025 13:38:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -57.98357529907871,
+    "lng": -122.51550908380672,
+    "timestamp": 1755524391633,
+    "readableDate": "Mon, 18 Aug 2025 13:39:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -61.31454520644233,
+    "lng": -124.70613180917358,
+    "timestamp": 1755524451633,
+    "readableDate": "Mon, 18 Aug 2025 13:40:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -64.60961119212473,
+    "lng": -127.35459148765845,
+    "timestamp": 1755524511633,
+    "readableDate": "Mon, 18 Aug 2025 13:41:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -67.8536990355323,
+    "lng": -130.65775423537877,
+    "timestamp": 1755524571633,
+    "readableDate": "Mon, 18 Aug 2025 13:42:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -71.02163095755053,
+    "lng": -134.93320810161728,
+    "timestamp": 1755524631633,
+    "readableDate": "Mon, 18 Aug 2025 13:43:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -74.06888897955946,
+    "lng": -140.71423957054438,
+    "timestamp": 1755524691633,
+    "readableDate": "Mon, 18 Aug 2025 13:44:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -76.91183917757402,
+    "lng": -148.91916826581135,
+    "timestamp": 1755524751633,
+    "readableDate": "Mon, 18 Aug 2025 13:45:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -79.3858005713288,
+    "lng": -161.06947128712721,
+    "timestamp": 1755524811633,
+    "readableDate": "Mon, 18 Aug 2025 13:46:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -81.17526196643338,
+    "lng": -179.04041785135055,
+    "timestamp": 1755524871633,
+    "readableDate": "Mon, 18 Aug 2025 13:47:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -81.81801578010675,
+    "lng": 157.50701879656043,
+    "timestamp": 1755524931633,
+    "readableDate": "Mon, 18 Aug 2025 13:48:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -81.06259101015773,
+    "lng": 134.35658579461614,
+    "timestamp": 1755524991633,
+    "readableDate": "Mon, 18 Aug 2025 13:49:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -79.19761228273838,
+    "lng": 116.91487456875834,
+    "timestamp": 1755525051633,
+    "readableDate": "Mon, 18 Aug 2025 13:50:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -76.68028432418315,
+    "lng": 105.16363254564058,
+    "timestamp": 1755525111633,
+    "readableDate": "Mon, 18 Aug 2025 13:51:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -73.81103936167221,
+    "lng": 97.2070388366219,
+    "timestamp": 1755525171633,
+    "readableDate": "Mon, 18 Aug 2025 13:52:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -70.74544927020092,
+    "lng": 91.57823302104796,
+    "timestamp": 1755525231633,
+    "readableDate": "Mon, 18 Aug 2025 13:53:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -67.56272990447545,
+    "lng": 87.39921445731639,
+    "timestamp": 1755525291633,
+    "readableDate": "Mon, 18 Aug 2025 13:54:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -64.30526782004506,
+    "lng": 84.15972306177605,
+    "timestamp": 1755525351633,
+    "readableDate": "Mon, 18 Aug 2025 13:55:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -60.99716863252241,
+    "lng": 81.55495137782728,
+    "timestamp": 1755525411633,
+    "readableDate": "Mon, 18 Aug 2025 13:56:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -57.652941023699995,
+    "lng": 79.39530331603567,
+    "timestamp": 1755525471633,
+    "readableDate": "Mon, 18 Aug 2025 13:57:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -54.281770888984006,
+    "lng": 77.55797079372917,
+    "timestamp": 1755525531633,
+    "readableDate": "Mon, 18 Aug 2025 13:58:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -50.88972391782134,
+    "lng": 75.96039743491019,
+    "timestamp": 1755525591633,
+    "readableDate": "Mon, 18 Aug 2025 13:59:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -47.48096987463909,
+    "lng": 74.54523060521468,
+    "timestamp": 1755525651633,
+    "readableDate": "Mon, 18 Aug 2025 14:00:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -44.05847999318477,
+    "lng": 73.27144821304942,
+    "timestamp": 1755525711633,
+    "readableDate": "Mon, 18 Aug 2025 14:01:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -40.624447207330576,
+    "lng": 72.10893833227165,
+    "timestamp": 1755525771633,
+    "readableDate": "Mon, 18 Aug 2025 14:02:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -37.18054801599757,
+    "lng": 71.03507573635693,
+    "timestamp": 1755525831633,
+    "readableDate": "Mon, 18 Aug 2025 14:03:51 GMT",
+    "period": 1
+  },
+  {
+    "lat": -33.72811087777213,
+    "lng": 70.03249348720401,
+    "timestamp": 1755525891633,
+    "readableDate": "Mon, 18 Aug 2025 14:04:51 GMT",
+    "period": 2
+  },
+  {
+    "lat": -30.268227400487124,
+    "lng": 69.08759214576433,
+    "timestamp": 1755525951633,
+    "readableDate": "Mon, 18 Aug 2025 14:05:51 GMT",
+    "period": 2
+  },
+  {
+    "lat": -26.801827359811856,
+    "lng": 68.18951707268019,
+    "timestamp": 1755526011633,
+    "readableDate": "Mon, 18 Aug 2025 14:06:51 GMT",
+    "period": 2
+  },
+  {
+    "lat": -23.329730165162676,
+    "lng": 67.32944020741813,
+    "timestamp": 1755526071633,
+    "readableDate": "Mon, 18 Aug 2025 14:07:51 GMT",
+    "period": 2
+  },
+  {
+    "lat": -19.852678249088754,
+    "lng": 66.50004366497092,
+    "timestamp": 1755526131633,
+    "readableDate": "Mon, 18 Aug 2025 14:08:51 GMT",
+    "period": 2
+  },
+  {
+    "lat": -16.37137135370345,
+    "lng": 65.69514303839239,
+    "timestamp": 1755526191633,
+    "readableDate": "Mon, 18 Aug 2025 14:09:51 GMT",
+    "period": 2
+  },
+  {
+    "lat": -12.886469999775965,
+    "lng": 64.90939914712352,
+    "timestamp": 1755526251633,
+    "readableDate": "Mon, 18 Aug 2025 14:10:51 GMT",
+    "period": 2
+  },
+  {
+    "lat": -9.398616983479043,
+    "lng": 64.13810041046122,
+    "timestamp": 1755526311633,
+    "readableDate": "Mon, 18 Aug 2025 14:11:51 GMT",
+    "period": 2
+  },
+  {
+    "lat": -5.908443483841378,
+    "lng": 63.37698742400086,
+    "timestamp": 1755526371633,
+    "readableDate": "Mon, 18 Aug 2025 14:12:51 GMT",
+    "period": 2
+  },
+  {
+    "lat": -2.4165748948040764,
+    "lng": 62.62210878055475,
+    "timestamp": 1755526431633,
+    "readableDate": "Mon, 18 Aug 2025 14:13:51 GMT",
+    "period": 2
+  },
+  {
+    "lat": 1.0763650817759836,
+    "lng": 61.869696904089096,
+    "timestamp": 1755526491633,
+    "readableDate": "Mon, 18 Aug 2025 14:14:51 GMT",
+    "period": 2
+  },
+  {
+    "lat": 4.569751377201278,
+    "lng": 61.11605543150729,
+    "timestamp": 1755526551633,
+    "readableDate": "Mon, 18 Aug 2025 14:15:51 GMT",
+    "period": 2
+  },
+  {
+    "lat": 8.062954914703415,
+    "lng": 60.35745099573402,
+    "timestamp": 1755526611633,
+    "readableDate": "Mon, 18 Aug 2025 14:16:51 GMT",
+    "period": 2
+  },
+  {
+    "lat": 11.555339801551172,
+    "lng": 59.5900026793952,
+    "timestamp": 1755526671633,
+    "readableDate": "Mon, 18 Aug 2025 14:17:51 GMT",
+    "period": 2
+  },
+  {
+    "lat": 15.046259751400505,
+    "lng": 58.80956218284556,
+    "timestamp": 1755526731633,
+    "readableDate": "Mon, 18 Aug 2025 14:18:51 GMT",
+    "period": 2
+  },
+  {
+    "lat": 18.53505539979364,
+    "lng": 58.011576201100446,
+    "timestamp": 1755526791633,
+    "readableDate": "Mon, 18 Aug 2025 14:19:51 GMT",
+    "period": 2
+  },
+  {
+    "lat": 22.02103766469064,
+    "lng": 57.190924348533215,
+    "timestamp": 1755526851633,
+    "readableDate": "Mon, 18 Aug 2025 14:20:51 GMT",
+    "period": 2
+  }
+]

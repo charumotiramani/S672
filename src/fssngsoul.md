@@ -1,13 +1,11 @@
 ---
 title: FSS NGSO UL Controls
-theme: cotton
+# theme: cotton
 ---
 
 This notebook provides an interactive visualization of satellite antenna gain footprints on the Earth's surface. It allows users to select from several standard ITU-R (International Telecommunication Union Radiocommunication Sector) antenna pattern models, configure satellite and beam parameters, and observe the resulting gain contours on a world map.
 
 The primary purpose of this tool is to understand how various parameters—such as satellite altitude, beamwidth, and antenna gain—affect the coverage area and gain distribution of a satellite's signal on the ground.
-
-
 
 
 -------
@@ -37,7 +35,7 @@ const ngsoSs = Generators.input(selectNgsoSs);
 <div class="grid grid-cols-2">
 <div class="card">
 
-${selectNgsoSs}
+ ${selectNgsoSs}
 
 </div>
 <div class="card">
@@ -203,10 +201,15 @@ const Gm = Gm_GSO;
 
 const controls =({gainPatternType,satelliteLat,satelliteLon,satelliteAlt,gain_rel_1, gain_rel_2, gain_rel_3, gain_rel_4 ,satelliteLat, satelliteLon, satelliteAlt,antennaLat, antennaLon,Gm});
 
+```
+## Controls 
+
+```js
 display({controls});
 
 ```
 
+What is this 
 
 ```js 
 const relativeGains = [

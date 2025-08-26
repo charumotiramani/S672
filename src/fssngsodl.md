@@ -1,6 +1,6 @@
 ---
-title: FSS NGSO DL Controls
-theme: cotton
+title: FSS NGSO DL 
+# theme: cotton
 ---
 
 This notebook provides an interactive visualization of satellite antenna gain footprints on the Earth's surface. It allows users to select from several standard ITU-R (International Telecommunication Union Radiocommunication Sector) antenna pattern models, configure satellite and beam parameters, and observe the resulting gain contours on a world map.

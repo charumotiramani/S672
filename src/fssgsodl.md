@@ -1,6 +1,6 @@
 ---
-title: FSS GSO DL Controls
-theme: cotton
+title: FSS GSO DL
+# theme: cotton
 ---
 
 
