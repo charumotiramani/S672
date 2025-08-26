@@ -148,10 +148,15 @@ const ESlocations = turf.featureCollection( ESlocs.map((m) => turf.point(m.pos, 
 const SatelliteIndex=view(Inputs.select(SatelliteTLE, {format:d=> 
    {
     console.log("format ",d)
-    return SatelliteTLE[d].name
-    }, label:"SatelliteName",value:0}))
-const SatelliteName=SatelliteTLE[SatelliteIndex].name
-const tleinfo=view(Inputs.textarea({label:"TLE Info",value:SatelliteTLE[selIndex].tle}))
+    return d.name
+    }, label:"SatelliteName",value:SatelliteTLE[0]}))
+```
+
+```js
+const SatelliteName=SatelliteIndex.name
+const tleinfo=SatelliteIndex.tle
+display({SatelliteName,tleinfo})
+// const tleinfo=view(Inputs.textarea({label:"TLE Info",value:SatelliteIndex.tle,disabled:true}))
 ```
 
 <div class="ui segment">
