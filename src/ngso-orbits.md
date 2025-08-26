@@ -52,6 +52,7 @@ const location = view(
 ```js
 const rotate = view(Inputs.range([-180, 180], { label: "Rotate", step: 1 }));
 const rotateZ = view(Inputs.range([-180, 180], { label: "RotateZ", step: 1 }));
+const selIndex=view(Inputs.range([0,3],{label:"Pic location for pos",step:1}));
 ```
 
 </div>
@@ -122,6 +123,7 @@ const CombinedPosition = [
 
 ```
 
+
 ```js
 const orbit = turf.lineString(
   oceansatPos.filter((d) => d.period == selectPeriod).map((d) => [d.lng, d.lat])
@@ -140,7 +142,10 @@ const ESlocations = turf.featureCollection( ESlocs.map((m) => turf.point(m.pos, 
  
 ```
 
-
+```js
+// display(view(tleinfo))
+const tleinfo=view(Inputs.textarea({label:"TLE Info",value:oc3}))
+```
 
 <div class="ui segment">
 
@@ -203,7 +208,7 @@ const globe = Plot.plot({
       fill: "grey",
       fillOpacity: 0.5,
     }),
- Plot.dot(position, {
+ Plot.dot(pos, {
       
       x: "lng",
       y: "lat",
@@ -211,7 +216,7 @@ const globe = Plot.plot({
       // r: 1,
       // strokeOpacity: 0.5,
       tip:true,
-      title:"altitude",
+      title:d=>`alt:${d.altitude.toFixed(0)}\nelv(d):${d.elevation.toFixed(0)}`,
       // stroke:"grey",
       fill:d=> {
         // return "red"
@@ -221,41 +226,43 @@ const globe = Plot.plot({
       },
       // fillOpacity: 0.5,
     }),
-Plot.line(position, {
+    
+// Plot.line(position, {
       
-      x: "lng",
-      y: "lat",
-      strokeWidth: 1,
-      // r: 1,
-      strokeOpacity: 1,
-      tip:true,
-      title:"lng",
-      stroke:"green",
-      // fill:d=> {
-      //   // return "red"
-      //   let angle=calculateLookAngles(esloc.lat,esloc.lng,d.lat,d.lng,d.altitude)
+//       x: "lng",
+//       y: "lat",
+//       strokeWidth: 1,
+//       // r: 1,
+//       strokeOpacity: 1,
+//       tip:true,
+//       title:"lng",
+//       stroke:"green",
+//       // fill:d=> {
+//       //   // return "red"
+//       //   let angle=calculateLookAngles(esloc.lat,esloc.lng,d.lat,d.lng,d.altitude)
         
-      //   return angle.elevation>0?angle.elevation:"none";
-      // },
-      // fillOpacity: 0.5,
-    }),
-    Plot.dot(operational, {
-      x: "lng",
-      y: "lat",
-      // marker: "square",
-      strokeWidth: 1,
-      strokeOpacity: 0.8,
-      stroke: "elevation",
-      // stroke: (d) => (d.elevation <= 5 ? "red" : "black"),
-      fillOpacity: 1,
-      fill: "elevation",
-    }),
+//       //   return angle.elevation>0?angle.elevation:"none";
+//       // },
+//       // fillOpacity: 0.5,
+//     }),
+    // Plot.dot(operational, {
+    //   x: "lng",
+    //   y: "lat",
+    //   // marker: "square",
+    //   strokeWidth: 1,
+    //   strokeOpacity: 0.8,
+    //   stroke: "elevation",
+    //   // stroke: (d) => (d.elevation <= 5 ? "red" : "black"),
+    //   fillOpacity: 1,
+    //   fill: "elevation",
+    // }),
 
-    Plot.geo(orbit, {
-      stroke: "green",
-      strokeWidth: 3,
-      strokeDasharray: [5, 5],
-    }),
+    // Plot.geo(orbit, {
+    //   stroke: "green",
+    //   strokeWidth: 3,
+    //   strokeDasharray: [5, 5],
+    // }),
+    Plot.geo(orbittle,{stroke:"red",strokeWidth:1,strokeOpacity:.5}),
   ],
 });
 display(globe);
@@ -431,7 +438,7 @@ function toggleWindow(selector) {
 ```
 
 ```js 
-const selIndex=0;
+
 const esloc=({lat:ESlocs[selIndex].pos[1],lng:ESlocs[selIndex].pos[0]})
 // const angles=calculateLookAngles(esloc[0],esloc[1], 0, 70, 35786)
 
@@ -447,14 +454,28 @@ const R3countries=turf.featureCollection(world.filter(d=>d.properties.ITURegion=
 // display({R3countries})
 display({CombinedPosition});
 display({orbit,orbitFull,ESlocs,results})
+```
 
-const pos= getOceansat2Positions(tle, argv.hours, new Date(), argv.ESlat, argv.ESlng);
+```js
+const oc3=`1 21397U 91039A   25231.21714033  .00002229  00000-0  16311-3 0  9998 
+2 21397  82.5192 172.7543 0012906 304.5618  55.4389 15.03085306855682`
+
+// const tleinfo=view(Inputs.textarea({label:"TLE Info",value:oc3}))
+```
+
+```js echo
+
+const pos= getOceansat2Positions(tleinfo, 24, new Date(), esloc.lat , esloc.lng);
+const orbittle = turf.lineString(
+  pos.map((d) => [d.lng, d.lat])
+);
+display(orbittle)
 ```
 
 
 
 
-```js
+```js  
 // This function will return an array of latitude and longitude objects over a given period
 function getOceansat2Positions(tle, hours, initialNow, esLat, esLng) {
     const meanMotion = getMeanMotion(tle);
@@ -465,7 +486,7 @@ function getOceansat2Positions(tle, hours, initialNow, esLat, esLng) {
 
     for (let i = 0; i < hoursInMs; i += stepInMs) {
         const timestamp = initialNow.getTime() + i;
-        const latLonObj = await getLatLngObj(tle, timestamp);
+        const latLonObj =  getLatLngObj(tle, timestamp);
         const periodNumber = Math.floor(i / (period * 60 * 1000)) + 1;
         const offsetInMinutes = (timestamp - initialNow.getTime()) / (1000 * 60); // Calculate offset
 
@@ -497,5 +518,10 @@ function getOceansat2Positions(tle, hours, initialNow, esLat, esLng) {
     return positions;
 }
 
+
+```
+
+```js
+import { getLatLngObj, getMeanMotion, getSatelliteInfo } from 'tle.js';
 
 ```
